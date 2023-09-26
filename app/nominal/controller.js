@@ -10,9 +10,11 @@ module.exports = {
       const nominal = await Nominal.find()
       res.render('admin/nominal/view_nominal', {
         nominal,
-        alert
+        alert,
+        name: req.session.user.name,
+        title: 'Halaman nominal'
       })
-    } catch (error) {
+    } catch (err) {
       req.flash('alertMessage', `${err.message}`)
       req.flash('alertStatus', 'danger')
       res.redirect('/nominal')
@@ -20,8 +22,11 @@ module.exports = {
   },
   viewCreate : async(req, res) => {
     try {
-      res.render('admin/nominal/create')
-    } catch (error) {
+      res.render('admin/nominal/create', {
+        name: req.session.user.name,
+        title: 'Halaman tambah nominal'
+      })
+    } catch (err) {
       req.flash('alertMessage', `${err.message}`)
       req.flash('alertStatus', 'danger')
       res.redirect('/nominal')
@@ -37,7 +42,7 @@ module.exports = {
       req.flash('alertStatus', 'success')
 
       res.redirect('/nominal')
-    } catch (error) {
+    } catch (err) {
       req.flash('alertMessage', `${err.message}`)
       req.flash('alertStatus', 'danger')
       res.redirect('/nominal')
@@ -49,9 +54,11 @@ module.exports = {
       const nominal = await Nominal.findOne({_id : id})
 
       res.render('admin/nominal/edit', {
-        nominal
+        nominal,
+        name: req.session.user.name,
+        title: 'Halaman ubah nominal'
       })
-    } catch (error) {
+    } catch (err) {
       req.flash('alertMessage', `${err.message}`)
       req.flash('alertStatus', 'danger')
       res.redirect('/nominal')
@@ -68,7 +75,7 @@ module.exports = {
       req.flash('alertMessage', "Berhasil ubah nominal")
       req.flash('alertStatus', 'success')
       res.redirect('/nominal')
-    } catch (error) {
+    } catch (err) {
       req.flash('alertMessage', `${err.message}`)
       req.flash('alertStatus', 'danger')
       res.redirect('/nominal')
@@ -84,7 +91,7 @@ module.exports = {
       req.flash('alertStatus', 'success')
 
       res.redirect('/nominal')
-    } catch (error) {
+    } catch (err) {
       req.flash('alertMessage', `${err.message}`)
       req.flash('alertStatus', 'danger')
       res.redirect('/nominal')

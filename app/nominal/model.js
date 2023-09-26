@@ -12,6 +12,6 @@ let nominalSchema = mongoose.Schema({
     type: Number,
     default: 0
   }
-})
+}, { timeStamp: true })
 
 module.exports = mongoose.model("Nominal", nominalSchema)

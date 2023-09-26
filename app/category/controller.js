@@ -10,9 +10,11 @@ module.exports = {
       const category = await Category.find()
       res.render('admin/category/view_category', {
         category,
-        alert
+        alert,
+        name: req.session.user.name,
+        title: 'Halaman kategori'
       })
-    } catch (error) {
+    } catch (err) {
       req.flash('alertMessage', `${err.message}`)
       req.flash('alertStatus', 'danger')
       res.redirect('/category')
@@ -20,8 +22,11 @@ module.exports = {
   },
   viewCreate : async(req, res) => {
     try {
-      res.render('admin/category/create')
-    } catch (error) {
+      res.render('admin/category/create', {
+        name: req.session.user.name,
+        title: 'Halaman tambah kategori'
+      })
+    } catch (err) {
       req.flash('alertMessage', `${err.message}`)
       req.flash('alertStatus', 'danger')
       res.redirect('/category')
@@ -37,7 +42,7 @@ module.exports = {
       req.flash('alertStatus', 'success')
 
       res.redirect('/category')
-    } catch (error) {
+    } catch (err) {
       req.flash('alertMessage', `${err.message}`)
       req.flash('alertStatus', 'danger')
       res.redirect('/category')
@@ -49,9 +54,11 @@ module.exports = {
       const category = await Category.findOne({_id : id})
 
       res.render('admin/category/edit', {
-        category
+        category,
+        name: req.session.user.name,
+        title: 'Halaman ubah kategori'
       })
-    } catch (error) {
+    } catch (err) {
       req.flash('alertMessage', `${err.message}`)
       req.flash('alertStatus', 'danger')
       res.redirect('/category')
@@ -68,7 +75,7 @@ module.exports = {
       req.flash('alertMessage', "Berhasil ubah kategori")
       req.flash('alertStatus', 'success')
       res.redirect('/category')
-    } catch (error) {
+    } catch (err) {
       req.flash('alertMessage', `${err.message}`)
       req.flash('alertStatus', 'danger')
       res.redirect('/category')
@@ -84,7 +91,7 @@ module.exports = {
       req.flash('alertStatus', 'success')
 
       res.redirect('/category')
-    } catch (error) {
+    } catch (err) {
       req.flash('alertMessage', `${err.message}`)
       req.flash('alertStatus', 'danger')
       res.redirect('/category')

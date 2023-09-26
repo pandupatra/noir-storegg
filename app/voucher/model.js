@@ -6,7 +6,7 @@ let voucherSchema = mongoose.Schema({
   },
   status: {
     type: String,
-    enum: ['Y, N'],
+    enum: ['Y', 'N'],
     default: 'Y'
   },
   thumbnail: {
@@ -24,6 +24,6 @@ let voucherSchema = mongoose.Schema({
     type: mongoose.Schema.Types.ObjectId,
     ref: 'User'
   }
-})
+}, { timeStamp: true })
 
 module.exports = mongoose.model("Voucher", voucherSchema)
